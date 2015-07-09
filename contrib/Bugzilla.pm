@@ -34,6 +34,7 @@ use strict;
 #######################################################################
 
 use constant BZ_ROOT_DIR => '/usr/share/bugzilla/lib';
+#use constant BZ_ROOT_DIR => '/var/www/bugzilla/lib';
 use constant BZ_LIB_DIR => BZ_ROOT_DIR . '/lib';
 
 #######################################################################
