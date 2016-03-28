@@ -92,8 +92,8 @@ if (defined $cgi->param('dontchange')) {
 # do a match on the fields if applicable
 Bugzilla::User::match_field({
     'qa_contact'                => { 'type' => 'single' },
-    'newcc'                     => { 'type' => 'multi'  },
-    'masscc'                    => { 'type' => 'multi'  },
+#    'newcc'                     => { 'type' => 'multi'  },
+#    'masscc'                    => { 'type' => 'multi'  },
     'assigned_to'               => { 'type' => 'single' },
 });
 
