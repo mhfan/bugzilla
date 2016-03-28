@@ -12,6 +12,9 @@ use warnings;
 
 use lib qw(. lib);
 
+use open qw(:utf8);
+use Encode;
+
 use Bugzilla;
 use Bugzilla::Constants;
 use Bugzilla::Util;
@@ -87,7 +90,7 @@ else {
     scalar(@datasets) || ThrowUserError('missing_datasets');
 
     if (grep { $_ !~ /^[A-Za-z0-9:_-]+$/ } @datasets) {
-        ThrowUserError('invalid_datasets', {'datasets' => \@datasets});
+        #ThrowUserError('invalid_datasets', {'datasets' => \@datasets});
     }
 
     # Filenames must not be guessable as they can point to products
@@ -96,7 +99,7 @@ else {
     my $project = bz_locations()->{'project'} || '';
     my $image_file =  join(':', ($project, $product->id, @datasets));
     my $key = Bugzilla->localconfig->{'site_wide_secret'};
-    $image_file = hmac_sha256_base64($image_file, $key) . '.png';
+    $image_file = hmac_sha256_base64(encode_utf8($image_file), $key) . '.png';
     $image_file =~ s/\+/-/g;
     $image_file =~ s/\//_/g;
     trick_taint($image_file);
